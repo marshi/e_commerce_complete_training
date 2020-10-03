@@ -27,9 +27,13 @@ class SplashPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           5,
-                          (index) => createDot(
-                              watch(splashContentViewModelProvider.state),
-                              index),
+                          (index) {
+                            var splashContentState =
+                                watch(splashContentViewModelProvider.state);
+                            print(splashContentState);
+                            return createDot(
+                                splashContentState.currentPage, index);
+                          },
                         ),
                       );
                     },

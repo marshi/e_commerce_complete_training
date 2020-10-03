@@ -1,14 +1,15 @@
+import 'package:e_commerce_complete_training/splash/splash_content_state.dart';
 import 'package:flutter_riverpod/all.dart';
 
-class SplashContentViewModel extends StateNotifier<int> {
-  SplashContentViewModel() : super(0);
+class SplashContentViewModel extends StateNotifier<SplashContentState> {
+  SplashContentViewModel() : super(SplashContentState(0));
 
   int currentPage() {
-    return state;
+    return state.currentPage;
   }
 
   void increment() {
     print(this.hashCode);
-    state = (state + 1) % 5;
+    state = SplashContentState((state.currentPage + 1) % 5);
   }
 }
