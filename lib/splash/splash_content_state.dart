@@ -1,3 +1,5 @@
 class SplashContentState {
-  final int currentPage = 0;
+  final int currentPage;
+
+  SplashContentState(this.currentPage);
 }

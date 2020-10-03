@@ -2,7 +2,7 @@ import 'package:e_commerce_complete_training/constants.dart';
 import 'package:e_commerce_complete_training/splash/splash_content.dart';
 import 'package:e_commerce_complete_training/splash/splash_content_state_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SplashPage extends StatelessWidget {
   @override
@@ -23,13 +23,13 @@ class SplashPage extends StatelessWidget {
                   padding: const EdgeInsets.all(30.0),
                   child: Consumer(
                     builder: (context, watch, _) {
-                      final viewModel = watch(splashContentViewModelProvider);
-                      print("aiueo ${viewModel.hashCode}");
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           5,
-                          (index) => createDot(viewModel.currentPage(), index),
+                          (index) => createDot(
+                              watch(splashContentViewModelProvider.state),
+                              index),
                         ),
                       );
                     },
