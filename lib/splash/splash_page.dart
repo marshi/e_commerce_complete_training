@@ -1,10 +1,27 @@
 import 'package:e_commerce_complete_training/constants.dart';
+import 'package:e_commerce_complete_training/splash/default_button.dart';
 import 'package:e_commerce_complete_training/splash/splash_content.dart';
 import 'package:e_commerce_complete_training/splash/splash_content_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SplashPage extends StatelessWidget {
+  final List<Map<String, String>> contents = [
+    {
+      "text": "welcome to Tokoto, Let's shop!",
+      "image": "assets/images/splash_1.png",
+    },
+    {
+      "text":
+          "We help people conect with store \naround United State of America",
+      "image": "assets/images/splash_2.png",
+    },
+    {
+      "text": "We show the easy way to shop. \nJust stay at home with us",
+      "image": "assets/images/splash_3.png",
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
@@ -15,7 +32,20 @@ class SplashPage extends StatelessWidget {
             children: [
               Expanded(
                 flex: 5,
-                child: SplashContent(),
+                child: Consumer(
+                  builder: (context, watch, _) => PageView.builder(
+                    itemCount: 3,
+                    onPageChanged: (index) {
+                      context
+                          .read(splashContentViewModelProvider)
+                          .setCurrentPage(index);
+                    },
+                    itemBuilder: (context, index) => SplashContent(
+                      contents[index]["image"],
+                      contents[index]["text"],
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 flex: 1,
@@ -26,7 +56,7 @@ class SplashPage extends StatelessWidget {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
-                          5,
+                          3,
                           (index) {
                             var splashContentState =
                                 watch(splashContentViewModelProvider.state);
@@ -41,17 +71,8 @@ class SplashPage extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Expanded(
-                flex: 1,
-                child: Consumer(
-                  builder: (context, watch, _) => FlatButton(
-                    child: Text("aiueo"),
-                    onPressed: () {
-                      context.read(splashContentViewModelProvider).increment();
-                    },
-                  ),
-                ),
-              )
+              DefaultButton(),
+              Spacer(),
             ],
           ),
         ),

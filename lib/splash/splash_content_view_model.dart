@@ -8,8 +8,11 @@ class SplashContentViewModel extends StateNotifier<SplashContentState> {
     return state.currentPage;
   }
 
+  void setCurrentPage(int page) {
+    state = SplashContentState(page);
+  }
+
   void increment() {
-    print(this.hashCode);
     state = SplashContentState((state.currentPage + 1) % 5);
   }
 }

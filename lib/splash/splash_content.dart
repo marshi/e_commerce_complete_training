@@ -4,6 +4,11 @@ import 'package:e_commerce_complete_training/constants.dart';
 import 'package:flutter/material.dart';
 
 class SplashContent extends StatelessWidget {
+  final String imagePath;
+  final String text;
+
+  SplashContent(this.imagePath, this.text);
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -19,12 +24,10 @@ class SplashContent extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(
-          "welcome to Tokoto, Let's shop!",
-        ),
+        Text(text, textAlign: TextAlign.center),
         Spacer(flex: 3),
         Image.asset(
-          "assets/images/splash_1.png",
+          imagePath,
           width: size.width * 0.6,
         ),
       ],
