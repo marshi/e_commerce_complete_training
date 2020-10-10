@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SplashPage extends StatelessWidget {
+  static final name = "SplashPage";
+
   final List<Map<String, String>> contents = [
     {
       "text": "welcome to Tokoto, Let's shop!",
@@ -24,56 +26,58 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: SafeArea(
-        child: Container(
-          width: double.infinity,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 5,
-                child: Consumer(
-                  builder: (context, watch, _) => PageView.builder(
-                    itemCount: 3,
-                    onPageChanged: (index) {
-                      context
-                          .read(splashContentViewModelProvider)
-                          .setCurrentPage(index);
-                    },
-                    itemBuilder: (context, index) => SplashContent(
-                      contents[index]["image"],
-                      contents[index]["text"],
+    return Scaffold(
+      body: ProviderScope(
+        child: SafeArea(
+          child: Container(
+            width: double.infinity,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: Consumer(
+                    builder: (context, watch, _) => PageView.builder(
+                      itemCount: 3,
+                      onPageChanged: (index) {
+                        context
+                            .read(splashContentViewModelProvider)
+                            .setCurrentPage(index);
+                      },
+                      itemBuilder: (context, index) => SplashContent(
+                        contents[index]["image"],
+                        contents[index]["text"],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Consumer(
-                    builder: (context, watch, _) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          3,
-                          (index) {
-                            var splashContentState =
-                                watch(splashContentViewModelProvider.state);
-                            print(splashContentState);
-                            return createDot(
-                                splashContentState.currentPage, index);
-                          },
-                        ),
-                      );
-                    },
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Consumer(
+                      builder: (context, watch, _) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            3,
+                            (index) {
+                              var splashContentState =
+                                  watch(splashContentViewModelProvider.state);
+                              print(splashContentState);
+                              return createDot(
+                                  splashContentState.currentPage, index);
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-              Spacer(),
-              DefaultButton(),
-              Spacer(),
-            ],
+                Spacer(),
+                DefaultButton(),
+                Spacer(),
+              ],
+            ),
           ),
         ),
       ),
