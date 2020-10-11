@@ -1,5 +1,5 @@
 import 'package:e_commerce_complete_training/constants.dart';
-import 'package:e_commerce_complete_training/splash/default_button.dart';
+import 'package:e_commerce_complete_training/default_button.dart';
 import 'package:e_commerce_complete_training/splash/splash_content.dart';
 import 'package:e_commerce_complete_training/splash/splash_content_state_provider.dart';
 import 'package:flutter/material.dart';
